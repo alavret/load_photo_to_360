@@ -60,9 +60,9 @@ def main_menu():
     print("Loading photos to Y360 catalog...")
     
     for file_path in files:
-        name = file_path.stem
+        name = file_path.stem.lower()
         for user in users:
-            if user["nickname"] == name or name in user["aliases"]:
+            if user["nickname"].lower() == name or name in user["aliases"]:
                 print(f"Loading photo for user {user['nickname']} (file - {file_path})")
                 if dry_run:
                     print(f"Dry run. Skipping photo loading for user {user['nickname']} (file - {file_path})")
