@@ -79,7 +79,7 @@ def main_menu():
                 break
         if not is_found:
             if not file_path.stem.lower().endswith("_resized"):
-                print(f"User with name {name} not found in Y360 catalog. Skipping photo loading for user {name} (file - {file_path})")
+                print(f"!!! Warning !!! User with name _ {name} _ not found in Y360 catalog. Skipping photo loading for user {name} (file - {file_path})")
 
 def resize_image(file_path):
     base_width = int(os.environ.get('RESIZE_WIDTH'))
