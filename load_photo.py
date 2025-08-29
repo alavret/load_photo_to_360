@@ -59,11 +59,14 @@ def main_menu():
 
     print("Loading photos to Y360 catalog...")
     
+    
     for file_path in files:
         name = file_path.stem.lower()
+        is_found = False
         for user in users:
             if user["nickname"].lower() == name or name in user["aliases"]:
                 print(f"Loading photo for user {user['nickname']} (file - {file_path})")
+                is_found = True
                 if dry_run:
                     print(f"Dry run. Skipping photo loading for user {user['nickname']} (file - {file_path})")
                 else:
@@ -74,7 +77,9 @@ def main_menu():
                         full_path = file_path
                     organization.load_photo(user["id"], full_path, name)
                 break
-
+        if not is_found:
+            if not file_path.stem.lower().endswith("_resized"):
+                print(f"User with name {name} not found in Y360 catalog. Skipping photo loading for user {name} (file - {file_path})")
 
 def resize_image(file_path):
     base_width = int(os.environ.get('RESIZE_WIDTH'))
